@@ -43,6 +43,11 @@ void initFireSystem(FireDetectionSystem* system) {
     }
 }
 
+void readSensors(FireDetectionSystem* system) {
+    system->temperatureSensor.value = analogRead(system->temperatureSensor.pin) * (500.0 / 1023.0);
+    system->gasSensor.value = analogRead(system->gasSensor.pin);
+}
+
 void setup() {
     Serial.begin(9600);
     lcd.begin(16, 2);
@@ -50,5 +55,6 @@ void setup() {
 }
 
 void loop() {
+    readSensors(&fireDetectionSystem);
     delay(1000);
 }
