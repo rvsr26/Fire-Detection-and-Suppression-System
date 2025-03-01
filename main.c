@@ -5,6 +5,22 @@
 #define SAFE_MSG "Status: Safe  "
 #define ALERT_MSG "Status: ALERT "
 
+//structure for sensors
+typedef struct {
+    int pin;
+    float value;
+} Sensor;
+
+//structure for the system's components
+typedef struct {
+    int motor[2];
+    int ledRed;
+    int ledGreen;
+    int buzzer;
+    Sensor temperatureSensor;
+    Sensor gasSensor;
+} FireDetectionSystem;
+
 void setup() {
     Serial.begin(9600);
 }
