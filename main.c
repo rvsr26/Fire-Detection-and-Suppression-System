@@ -46,10 +46,16 @@ void initFireSystem(FireDetectionSystem* system) {
 void readSensors(FireDetectionSystem* system) {
     system->temperatureSensor.value = analogRead(system->temperatureSensor.pin) * (500.0 / 1023.0);
     system->gasSensor.value = analogRead(system->gasSensor.pin);
+
+    Serial.print("Temperature (C): ");
+    Serial.print(system->temperatureSensor.value, 1);
+    Serial.print(" | Gas: ");
+    Serial.println(system->gasSensor.value);
 }
 
 void setup() {
     Serial.begin(9600);
+    Serial.println("Fire Detection System\n");
     lcd.begin(16, 2);
     initFireSystem(&fireDetectionSystem);
 }
