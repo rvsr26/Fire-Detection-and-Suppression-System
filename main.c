@@ -57,6 +57,19 @@ void controlComponent(int pin, bool state) {
     digitalWrite(pin, state ? HIGH : LOW);
 }
 
+void displayData(FireDetectionSystem* system) {
+    lcd.clear();
+
+    lcd.setCursor(0, 0);
+    lcd.print("Temp: ");
+    lcd.print(system->temperatureSensor.value, 1);
+    lcd.print("C");
+
+    lcd.setCursor(0, 1);
+    lcd.print("Gas: ");
+    lcd.print(system->gasSensor.value);
+}
+
 void activateAlert(FireDetectionSystem* system) {
     controlComponent(system->motor[1], true);
     controlComponent(system->motor[0], false);
@@ -95,6 +108,7 @@ void setup() {
 
 void loop() {
     readSensors(&fireDetectionSystem);
+    displayData(&fireDetectionSystem);
     checkStatus(&fireDetectionSystem);
     delay(1000);
 }
