@@ -69,6 +69,15 @@ void activateAlert(FireDetectionSystem* system) {
     Serial.println("Fire and Rescue: Dial 101 immediately");
 }
 
+void deactivateAlert(FireDetectionSystem* system) {
+    controlComponent(system->motor[1], false);
+    noTone(system->buzzer);
+    controlComponent(system->ledRed, false);
+    controlComponent(system->ledGreen, true);
+
+    Serial.println("All systems off. Safe.");
+}
+
 void setup() {
     Serial.begin(9600);
     Serial.println("Fire Detection System\n");
