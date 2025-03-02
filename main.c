@@ -57,6 +57,18 @@ void controlComponent(int pin, bool state) {
     digitalWrite(pin, state ? HIGH : LOW);
 }
 
+void activateAlert(FireDetectionSystem* system) {
+    controlComponent(system->motor[1], true);
+    controlComponent(system->motor[0], false);
+    controlComponent(system->ledRed, true);
+    controlComponent(system->ledGreen, false);
+    tone(system->buzzer, 220, 100);
+
+    Serial.println("Warning...!!!! Room temperature is high or gas detected");
+    Serial.println("Need water!! Switch on water pump");
+    Serial.println("Fire and Rescue: Dial 101 immediately");
+}
+
 void setup() {
     Serial.begin(9600);
     Serial.println("Fire Detection System\n");
