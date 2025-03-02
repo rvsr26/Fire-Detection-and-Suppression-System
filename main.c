@@ -78,6 +78,14 @@ void deactivateAlert(FireDetectionSystem* system) {
     Serial.println("All systems off. Safe.");
 }
 
+void checkStatus(FireDetectionSystem* system) {
+    if (system->temperatureSensor.value < TEMP_THRESHOLD && system->gasSensor.value < GAS_THRESHOLD) {
+        deactivateAlert(system);
+    } else {
+        activateAlert(system);
+    }
+}
+
 void setup() {
     Serial.begin(9600);
     Serial.println("Fire Detection System\n");
@@ -87,5 +95,6 @@ void setup() {
 
 void loop() {
     readSensors(&fireDetectionSystem);
+    checkStatus(&fireDetectionSystem);
     delay(1000);
 }
