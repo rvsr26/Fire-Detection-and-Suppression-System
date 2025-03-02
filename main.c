@@ -53,6 +53,10 @@ void readSensors(FireDetectionSystem* system) {
     Serial.println(system->gasSensor.value);
 }
 
+void controlComponent(int pin, bool state) {
+    digitalWrite(pin, state ? HIGH : LOW);
+}
+
 void setup() {
     Serial.begin(9600);
     Serial.println("Fire Detection System\n");
