@@ -14,3 +14,33 @@ When fire is detected, the system activates an **alarm (buzzer)**, turns ON a **
 - Display real-time sensor readings on a **16Ã—2 LCD**
 - Activate **alarm, motor, and LED indicators** during fire detection
 - Simulate a fire safety system using **Tinkercad**
+
+---
+
+## ðŸ› ï¸ Components Used
+- Arduino UNO
+- Gas Sensor (used as smoke/fire detector)
+- Temperature Sensor (LM35 / Analog)
+- 16Ã—2 LCD Display
+- Buzzer (Alarm)
+- DC Motor / Water Pump
+- Red LED (Alert)
+- Green LED (Safe)
+- Potentiometer (LCD contrast control)
+- Breadboard
+- Connecting wires
+
+---
+
+## ðŸ”Œ Pin Configuration
+| Component | Arduino Pin |
+|---------|------------|
+| Smoke Sensor | A0 |
+| Temperature Sensor | A1 |
+| Buzzer | D8 |
+| Green LED | D9 |
+| Motor / Pump | D10, D11 |
+| Red LED | D12 |
+| LCD RS | D2 |
+| LCD EN | D3 |
+| LCD D4â€“D7 | D4â€“D7 |
