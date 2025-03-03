@@ -58,18 +58,33 @@ void controlComponent(int pin, bool state) {
 }
 
 void displayData(FireDetectionSystem* system) {
-    lcd.clear();
+    lcd.clear(); // Clear previous data
 
+    // Display room temperature
     lcd.setCursor(0, 0);
     lcd.print("Temp: ");
     lcd.print(system->temperatureSensor.value, 1);
     lcd.print("C");
 
+    // Display gas value
     lcd.setCursor(0, 1);
     lcd.print("Gas: ");
     lcd.print(system->gasSensor.value);
 
+    // Wait for 1 second to ensure gas value is visible
     delay(1000);
+
+    // Display safety status
+    lcd.clear(); // Clear the display before showing the status
+    if (system->temperatureSensor.value < TEMP_THRESHOLD && system->gasSensor.value < GAS_THRESHOLD) {
+       lcd.setCursor(0, 0); 
+      lcd.print(SAFE_MSG);
+    } else {
+      	lcd.setCursor(0, 0);
+        lcd.print(ALERT_MSG);
+      	lcd.setCursor(0, 1);
+      	lcd.print("Dial 101 immediately");
+    }
 }
 
 void activateAlert(FireDetectionSystem* system) {
