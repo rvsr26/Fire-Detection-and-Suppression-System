@@ -34,6 +34,16 @@ FireDetectionSystem fireDetectionSystem = {
     .gasSensor = {A0, 0.0}
 };
 
+// Function prototypes
+void initFireSystem(FireDetectionSystem* system);
+void readSensors(FireDetectionSystem* system);
+void displayData(FireDetectionSystem* system);
+void checkStatus(FireDetectionSystem* system);
+void controlComponent(int pin, bool state);
+void activateAlert(FireDetectionSystem* system);
+void deactivateAlert(FireDetectionSystem* system);
+
+// Function to initialize the components
 void initFireSystem(FireDetectionSystem* system) {
     pinMode(system->buzzer, OUTPUT);
     pinMode(system->ledRed, OUTPUT);
@@ -43,6 +53,7 @@ void initFireSystem(FireDetectionSystem* system) {
     }
 }
 
+// Function to read sensor values
 void readSensors(FireDetectionSystem* system) {
     system->temperatureSensor.value = analogRead(system->temperatureSensor.pin) * (500.0 / 1023.0);
     system->gasSensor.value = analogRead(system->gasSensor.pin);
@@ -53,10 +64,12 @@ void readSensors(FireDetectionSystem* system) {
     Serial.println(system->gasSensor.value);
 }
 
+// Function to control components (simplifies digitalWrite logic)
 void controlComponent(int pin, bool state) {
     digitalWrite(pin, state ? HIGH : LOW);
 }
 
+// Function to display sensor data on the LCD
 void displayData(FireDetectionSystem* system) {
     lcd.clear(); // Clear previous data
 
@@ -87,6 +100,7 @@ void displayData(FireDetectionSystem* system) {
     }
 }
 
+// Function to activate alert state
 void activateAlert(FireDetectionSystem* system) {
     controlComponent(system->motor[1], true);
     controlComponent(system->motor[0], false);
@@ -99,6 +113,7 @@ void activateAlert(FireDetectionSystem* system) {
     Serial.println("Fire and Rescue: Dial 101 immediately");
 }
 
+// Function to deactivate alert state
 void deactivateAlert(FireDetectionSystem* system) {
     controlComponent(system->motor[1], false);
     noTone(system->buzzer);
@@ -108,6 +123,7 @@ void deactivateAlert(FireDetectionSystem* system) {
     Serial.println("All systems off. Safe.");
 }
 
+// Function to check system status and take action
 void checkStatus(FireDetectionSystem* system) {
     if (system->temperatureSensor.value < TEMP_THRESHOLD && system->gasSensor.value < GAS_THRESHOLD) {
         deactivateAlert(system);
