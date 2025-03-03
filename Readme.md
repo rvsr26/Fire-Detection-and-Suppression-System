@@ -44,3 +44,38 @@ When fire is detected, the system activates an **alarm (buzzer)**, turns ON a **
 | LCD RS | D2 |
 | LCD EN | D3 |
 | LCD D4â€“D7 | D4â€“D7 |
+
+---
+
+## ðŸ§  System Working
+1. Arduino continuously reads values from the **temperature sensor** and **smoke sensor**.
+2. Sensor readings are displayed on the **LCD screen**.
+3. The readings are compared with predefined **threshold values**:
+   - Temperature > 50Â°C
+   - Smoke level above threshold
+4. If fire is detected:
+   - Buzzer turns ON
+   - Motor (water pump) activates
+   - Red LED turns ON
+   - Alert message is displayed on the LCD
+5. If no fire is detected:
+   - Green LED remains ON
+   - System stays in safe mode
+
+---
+
+## ðŸ–¥ï¸ Software & Simulation
+- Simulation Platform: **Tinkercad Circuits**
+- Programming Language: **Embedded C (Arduino)**
+- Library Used: **LiquidCrystal.h**
+
+
+---
+
+## ðŸ§ª Test Scenarios
+| Condition | Expected Output |
+|--------|----------------|
+| Normal temperature, no smoke | Green LED ON |
+| High temperature | Alarm + Motor ON |
+| Smoke due to fire | Alarm + Motor ON |
+| High temperature and smoke | Full alert system ON |
