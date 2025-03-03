@@ -68,6 +68,8 @@ void displayData(FireDetectionSystem* system) {
     lcd.setCursor(0, 1);
     lcd.print("Gas: ");
     lcd.print(system->gasSensor.value);
+
+    delay(1000);
 }
 
 void activateAlert(FireDetectionSystem* system) {
