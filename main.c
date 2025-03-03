@@ -132,16 +132,31 @@ void checkStatus(FireDetectionSystem* system) {
     }
 }
 
+// Setup function
 void setup() {
     Serial.begin(9600);
     Serial.println("Fire Detection System\n");
+
     lcd.begin(16, 2);
+    lcd.print("Fire Detection");
+    lcd.setCursor(4, 1);
+    lcd.print("System!!");
+    delay(2000);
+    lcd.clear();
+
+    // Initialize system components
     initFireSystem(&fireDetectionSystem);
 }
-
+// Main loop
 void loop() {
+    // Read sensors
     readSensors(&fireDetectionSystem);
+
+    // Display data
     displayData(&fireDetectionSystem);
+
+    // Check system status and take appropriate action
     checkStatus(&fireDetectionSystem);
-    delay(1000);
+
+    delay(1000); // 1 second delay for stability
 }
